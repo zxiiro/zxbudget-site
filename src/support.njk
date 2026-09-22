@@ -1,32 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZxBudget — Support</title>
-<style>
-  :root { color-scheme: light dark; }
-  body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem; }
-  h1 { font-size: 1.7rem; } h2 { font-size: 1.15rem; margin-top: 2rem; }
-  a { color: #2b6cb0; }
-  .muted { opacity: 0.7; font-size: 0.9rem; }
-  .card { border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-          border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem; }
-</style>
-</head>
-<body>
+---
+layout: base.njk
+title: ZxBudget — Support
+description: Help for ZxBudget. Where your data lives, how backups and import work, and how to email us.
+canonical: https://zxbudget.zxiiro.ca/support.html
+permalink: support.html
+nav: support
+---
+<div class="wrap prose-page">
 <h1>ZxBudget Support</h1>
 <p>ZxBudget is a private, zero-based budgeting app for iPhone, iPad, and Mac.
 Plan every dollar, track your spending across accounts and currencies, and
 watch your net worth grow — all stored in your own private iCloud, with no
 ads, no tracking, and no bank logins.</p>
 
-<div class="card">
-  <h2 style="margin-top:0">Get help</h2>
+<div class="help-card">
+  <h2>Get help</h2>
   <p>For questions, bug reports, or feedback, email
   <a href="mailto:zxiiro@gmail.com?subject=ZxBudget%20Support">zxiiro@gmail.com</a>.
   Please include your device model and OS version so we can help faster.</p>
+</div>
+
+<div class="help-card">
+  <h2>New here?</h2>
+  <p>Follow the <a href="/guides/quick-start/">quick start</a>, or browse the
+  <a href="/guides/">guide index</a>.</p>
 </div>
 
 <h2>Common questions</h2>
@@ -44,8 +41,7 @@ from a CSV export.</p>
 
 <p><strong>Why does the app need a network connection?</strong> Only for iCloud
 sync and to fetch public foreign-exchange rates for multi-currency budgets. See
-the <a href="./privacy.html">Privacy Policy</a> for details.</p>
+the <a href="/privacy.html">Privacy Policy</a> for details.</p>
 
-<p class="muted"><a href="./privacy.html">Privacy Policy</a></p>
-</body>
-</html>
+<p class="muted"><a href="/privacy.html">Privacy Policy</a></p>
+</div>
