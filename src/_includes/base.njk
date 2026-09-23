@@ -31,11 +31,15 @@
       <a href="/support.html"{% if nav == "support" %} aria-current="page"{% endif %}>Support</a>
       <a href="/privacy.html"{% if nav == "privacy" %} aria-current="page"{% endif %}>Privacy</a>
     </nav>
-    <div class="theme" role="group" aria-label="Appearance">
-      <button type="button" data-theme-choice="system" aria-pressed="true">System</button>
-      <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
-      <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
-    </div>
+    <button type="button" class="theme-toggle" aria-label="Switch to dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5 5l1.6 1.6M17.4 17.4 19 19M19 5l-1.6 1.6M6.6 17.4 5 19"/>
+      </svg>
+    </button>
   </div>
 </header>
 <p class="soon-banner">Coming soon to the App Store.</p>
@@ -56,34 +60,29 @@
 (function () {
   var key = "zxbudget-theme";
   var root = document.documentElement;
-  var buttons = document.querySelectorAll("[data-theme-choice]");
+  var button = document.querySelector(".theme-toggle");
+  if (!button) return;
 
-  function selected() {
-    return root.dataset.theme === "light" || root.dataset.theme === "dark"
-      ? root.dataset.theme
-      : "system";
+  function isDark() {
+    if (root.dataset.theme === "dark") return true;
+    if (root.dataset.theme === "light") return false;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  function label() {
+    button.setAttribute("aria-label", isDark() ? "Switch to light mode" : "Switch to dark mode");
   }
 
   function apply(choice) {
-    if (choice === "light" || choice === "dark") {
-      root.dataset.theme = choice;
-      try { localStorage.setItem(key, choice); } catch (e) {}
-    } else {
-      delete root.dataset.theme;
-      try { localStorage.removeItem(key); } catch (e) {}
-      choice = "system";
-    }
-    buttons.forEach(function (button) {
-      button.setAttribute("aria-pressed", button.getAttribute("data-theme-choice") === choice ? "true" : "false");
-    });
+    root.dataset.theme = choice;
+    try { localStorage.setItem(key, choice); } catch (e) {}
+    label();
   }
 
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      apply(button.getAttribute("data-theme-choice"));
-    });
+  button.addEventListener("click", function () {
+    apply(isDark() ? "light" : "dark");
   });
-  apply(selected());
+  label();
 })();
 </script>
 </body>
