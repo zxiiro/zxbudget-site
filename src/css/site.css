@@ -11,7 +11,7 @@
   --accent-text: #8e420c;
   --success: #3e8e5a;
   --success-surface: #e2eee6;
-  --divider: rgba(90, 46, 10, 0.14);
+  --divider: rgba(90, 46, 10, 0.12);
   --shadow: 0 10px 30px rgba(27, 21, 18, 0.06);
   color-scheme: light;
 }
@@ -25,12 +25,12 @@
     --secondary: #c9b39e;
     --muted: #8a7566;
     --accent: #f3b766;
-    --accent-soft: #3a2a18;
+    --accent-soft: color-mix(in srgb, #f3b766 14%, #1f1814);
     --on-accent: #2a1304;
     --accent-text: #f9d39a;
     --success: #6fc88a;
     --success-surface: #2b3226;
-    --divider: rgba(255, 244, 226, 0.12);
+    --divider: rgba(255, 244, 226, 0.08);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     color-scheme: dark;
   }
