@@ -324,6 +324,16 @@ h1 {
 .prose li { margin: 0.55rem 0; }
 .prose .lede { font-size: 1.05rem; }
 
+.step-shot { margin: 0.75rem 0 1.1rem; }
+.shot-row { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: flex-start; }
+.step-shot img, .shot-row img {
+  width: min(260px, 100%);
+  height: auto;
+  border-radius: 28px;
+  border: 1px solid var(--divider);
+  box-shadow: var(--shadow);
+}
+
 .note {
   background: var(--accent-soft);
   color: var(--text);
