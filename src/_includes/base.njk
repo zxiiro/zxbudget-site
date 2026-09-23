@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+(function () {
+  try {
+    var choice = localStorage.getItem("zxbudget-theme");
+    if (choice === "light" || choice === "dark") {
+      document.documentElement.dataset.theme = choice;
+    }
+  } catch (e) {}
+})();
+</script>
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
 {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
@@ -15,11 +25,18 @@
 <a class="skip" href="#content">Skip to content</a>
 <header class="site-header">
   <a class="wordmark" href="/"><img class="mark" src="/icons/icon-192.png" width="32" height="32" alt=""> ZxBudget</a>
-  <nav class="nav" aria-label="Site">
-    <a href="/guides/"{% if nav == "guides" %} aria-current="page"{% endif %}>Guides</a>
-    <a href="/support.html"{% if nav == "support" %} aria-current="page"{% endif %}>Support</a>
-    <a href="/privacy.html"{% if nav == "privacy" %} aria-current="page"{% endif %}>Privacy</a>
-  </nav>
+  <div class="header-end">
+    <nav class="nav" aria-label="Site">
+      <a href="/guides/"{% if nav == "guides" %} aria-current="page"{% endif %}>Guides</a>
+      <a href="/support.html"{% if nav == "support" %} aria-current="page"{% endif %}>Support</a>
+      <a href="/privacy.html"{% if nav == "privacy" %} aria-current="page"{% endif %}>Privacy</a>
+    </nav>
+    <div class="theme" role="group" aria-label="Appearance">
+      <button type="button" data-theme-choice="system" aria-pressed="true">System</button>
+      <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
 </header>
 <p class="soon-banner">Coming soon to the App Store.</p>
 <main id="content">
@@ -35,5 +52,39 @@
     </div>
   </div>
 </footer>
+<script>
+(function () {
+  var key = "zxbudget-theme";
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll("[data-theme-choice]");
+
+  function selected() {
+    return root.dataset.theme === "light" || root.dataset.theme === "dark"
+      ? root.dataset.theme
+      : "system";
+  }
+
+  function apply(choice) {
+    if (choice === "light" || choice === "dark") {
+      root.dataset.theme = choice;
+      try { localStorage.setItem(key, choice); } catch (e) {}
+    } else {
+      delete root.dataset.theme;
+      try { localStorage.removeItem(key); } catch (e) {}
+      choice = "system";
+    }
+    buttons.forEach(function (button) {
+      button.setAttribute("aria-pressed", button.getAttribute("data-theme-choice") === choice ? "true" : "false");
+    });
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      apply(button.getAttribute("data-theme-choice"));
+    });
+  });
+  apply(selected());
+})();
+</script>
 </body>
 </html>
