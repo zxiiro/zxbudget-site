@@ -413,13 +413,31 @@ h1 {
 }
 
 .step-shot { margin: 0; }
-.step-shot img, .shot-row img {
+.step-shot img, .shot-row img, .phone img {
   width: min(260px, 100%);
   height: auto;
   border-radius: 28px;
   border: 1px solid var(--divider);
   box-shadow: var(--shadow);
 }
+.phone img { width: 100%; }
+/* Light and dark captures share one slot. The hidden twin is display:none
+   so it leaves the layout and the accessibility tree. Specificity stays
+   above `.step-shot img` so a later display rule cannot show both. */
+.step-shot .shot-light,
+.shot-row .shot-light,
+.phone .shot-light { display: block; }
+.step-shot .shot-dark,
+.shot-row .shot-dark,
+.phone .shot-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .shot-light { display: none; }
+  :root:not([data-theme="light"]) .shot-dark { display: block; }
+}
+:root[data-theme="dark"] .shot-light { display: none; }
+:root[data-theme="dark"] .shot-dark { display: block; }
+:root[data-theme="light"] .shot-dark { display: none; }
+:root[data-theme="light"] .shot-light { display: block; }
 
 .note {
   background: var(--accent-soft);
