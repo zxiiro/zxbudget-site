@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Backups, import, and your subscription — ZxBudget
+description: Export, restore, the daily iCloud Drive copy, and the subscription.
+canonical: https://zxbudget.zxiiro.ca/guides/backups/
+nav: guides
+---
+<div class="wrap docs">
+{% include "guide-side.njk" %}
+<article class="prose">
+  <p class="eyebrow">Guide</p>
+  <h1>Backups and your subscription</h1>
+  <p class="lede">A backup is a file you keep. The subscription is billed by Apple. Neither one is required to read a budget you already have.</p>
+
+  <h2>Export and restore</h2>
+  <p>In Settings, or from the File menu on Mac, use <strong>Export Backup</strong> and <strong>Restore from Backup</strong>.</p>
+  <ul>
+    <li>Leave the passphrase empty for an unencrypted file: <strong>.json</strong> without receipt photos, or <strong>.aar</strong> when receipts are included.</li>
+    <li>A passphrase produces an encrypted <strong>.budgetbackup</strong> file.</li>
+  </ul>
+  <p>ZxBudget warns you when you export without a passphrase. iCloud sync is still how your devices stay together. The file is a copy you can store somewhere else.</p>
+
+  <h2>The daily copy</h2>
+  <p>Once a day, ZxBudget can write an unencrypted <strong>.aar</strong> of each budget into your iCloud Drive, including receipts when they are there. It keeps the newest seven daily files for each budget. You can turn that off in Settings.</p>
+
+  <h2>Bring a plan with you</h2>
+  <p>Settings includes <strong>Import from YNAB</strong>. It is a guided import of a register and a category plan from a CSV export. On Mac it is also in the File menu. It does not connect to a bank.</p>
+
+  <h2>Subscription</h2>
+  <p>The download is free. At launch there is six months to try it, then one year at a time through Apple, with Family Sharing for up to 6 people. The price is the one Apple shows for your country. If the subscription lapses, you can still read the budget, export it, and sync.</p>
+
+  <h2>App lock</h2>
+  <p>App lock is off until you turn it on. It uses the device passcode, Face ID, or Touch ID. It stays on the device.</p>
+</article>
+</div>
