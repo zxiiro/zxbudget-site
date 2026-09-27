@@ -402,6 +402,19 @@ h1 {
   white-space: nowrap;
 }
 .prose th { color: var(--muted); font-size: 0.78rem; font-weight: 700; }
+.prose pre.csv {
+  overflow-x: auto;
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.prose pre.csv code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
 .prose h1 { font-size: 2.1rem; max-width: 40rem; }
 .prose h2 { font-size: 1.25rem; margin-top: 1.8rem; }
 .prose li { margin: 0.55rem 0; }
