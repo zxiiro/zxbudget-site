@@ -391,7 +391,17 @@ h1 {
 
 .side .group:first-child { margin-top: 0; }
 
-.docs .prose { max-width: none; }
+.docs .prose { max-width: none; min-width: 0; }
+.table-scroll { overflow-x: auto; margin: 1rem 0 0.4rem; }
+.prose table { width: max-content; min-width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.prose caption { caption-side: bottom; text-align: left; padding-top: 0.45rem; }
+.prose th, .prose td {
+  text-align: left;
+  padding: 0.4rem 0.7rem;
+  border-bottom: 1px solid var(--divider);
+  white-space: nowrap;
+}
+.prose th { color: var(--muted); font-size: 0.78rem; font-weight: 700; }
 .prose h1 { font-size: 2.1rem; max-width: 40rem; }
 .prose h2 { font-size: 1.25rem; margin-top: 1.8rem; }
 .prose li { margin: 0.55rem 0; }

@@ -1,0 +1,121 @@
+---
+layout: base.njk
+title: Import an existing budget — ZxBudget
+description: "Two CSV files in the YNAB export format: a register and a plan."
+canonical: https://zxbudget.zxiiro.ca/guides/import/
+nav: guides
+---
+<div class="wrap docs">
+{% include "guide-side.njk" %}
+<article class="prose">
+  <p class="eyebrow">Guide</p>
+  <h1>Import an existing budget</h1>
+  <p class="lede">ZxBudget reads two CSV files in the YNAB export format.</p>
+  <p>In Settings, and in the File menu on Mac, choose <strong>Import from YNAB</strong>. You give it a Register CSV and a Plan CSV.</p>
+
+  <h2>Register</h2>
+  <div class="table-scroll">
+    <table>
+      <caption class="muted">Sample register rows. These are not from a real budget.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Account</th>
+          <th scope="col">Date</th>
+          <th scope="col">Payee</th>
+          <th scope="col">Category Group</th>
+          <th scope="col">Category</th>
+          <th scope="col">Memo</th>
+          <th scope="col">Outflow</th>
+          <th scope="col">Inflow</th>
+          <th scope="col">Cleared</th>
+          <th scope="col">Flag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chequing</td><td>2019-04-03</td><td>Market Day</td><td>Everyday</td><td>Groceries</td><td></td><td>$41.15</td><td>$0.00</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Chequing</td><td>2019-04-07</td><td>Northwind</td><td>Inflow</td><td>Ready to Assign</td><td></td><td>$0.00</td><td>$880.00</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Cash Card</td><td>2019-04-11</td><td>Weekday Fare</td><td>Everyday</td><td>Transport</td><td></td><td>$8.05</td><td>$0.00</td><td>Cleared</td><td></td>
+        </tr>
+        <tr>
+          <td>Cash Card</td><td>2019-04-16</td><td>Lunch Counter</td><td>Everyday</td><td>Dining Out</td><td></td><td>$5.55</td><td>$0.00</td><td>Uncleared</td><td>Yellow</td>
+        </tr>
+        <tr>
+          <td>Chequing</td><td>2019-04-21</td><td>Hardware Store</td><td>Household</td><td>Repairs</td><td>Split (1/2) Paint</td><td>$64.10</td><td>$0.00</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Chequing</td><td>2019-04-21</td><td>Paper Goods</td><td>Household</td><td>Supplies</td><td>Split (2/2) Paper</td><td>$33.33</td><td>$0.00</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Chequing</td><td>2019-02-02</td><td>Transfer : Rainy Day</td><td></td><td></td><td></td><td>$128.40</td><td>$0.00</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Rainy Day</td><td>2019-02-02</td><td>Transfer : Chequing</td><td></td><td></td><td></td><td>$0.00</td><td>$128.40</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Chequing</td><td>2019-02-02</td><td>Starting Balance</td><td></td><td></td><td></td><td>$0.00</td><td>$440.00</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Cash Card</td><td>2019-02-02</td><td>Starting Balance</td><td></td><td></td><td></td><td>$33.33</td><td>$0.00</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Chequing</td><td>2019-04-03</td><td>Reconciliation Balance Adjustment</td><td></td><td></td><td></td><td>$0.00</td><td>$41.15</td><td>Reconciled</td><td></td>
+        </tr>
+        <tr>
+          <td>Cash Card</td><td>2027-04-04</td><td>Studio Rent</td><td>Household</td><td>Shelter</td><td></td><td>$75.25</td><td>$0.00</td><td>Uncleared</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li>A split is two or more rows with the same date and account. The memo starts with <strong>Split (1/2)</strong>, <strong>Split (2/2)</strong>, and so on. The payee on each row can differ.</li>
+    <li>A transfer payee is <strong>Transfer :</strong> plus the other account’s name. Each side is its own row.</li>
+    <li>Income uses the group Inflow and the category Ready to Assign.</li>
+    <li>Cleared is Uncleared, Cleared, or Reconciled.</li>
+    <li>Flag may be Red, Orange, Yellow, Green, Blue, or Purple, or a name of your own. During import you match any name that is not already one of those colors.</li>
+    <li>A category or group can begin with an emoji. ZxBudget keeps the emoji as the icon.</li>
+    <li>A date after today comes in as a one-time upcoming transaction.</li>
+    <li>A tracking account can leave Category empty.</li>
+  </ul>
+
+  <h2>Plan</h2>
+  <div class="table-scroll">
+    <table>
+      <caption class="muted">Sample plan rows. These are not from a real budget.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Month</th>
+          <th scope="col">Category Group</th>
+          <th scope="col">Category</th>
+          <th scope="col">Assigned</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mar 2019</td><td>Everyday</td><td>Groceries</td><td>$880.00</td>
+        </tr>
+        <tr>
+          <td>Mar 2019</td><td>Everyday</td><td>Dining Out</td><td>-$22.00</td>
+        </tr>
+        <tr>
+          <td>Mar 2019</td><td>Household</td><td>Paper Goods</td><td>$0.00</td>
+        </tr>
+        <tr>
+          <td>Mar 2019</td><td>Credit Card Payments</td><td>Cash Card</td><td>$128.40</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li>Assigned can be negative when money was moved out of the category.</li>
+    <li>A <strong>$0.00</strong> row is left out.</li>
+    <li>Activity and Available can be in the file. ZxBudget does not use them.</li>
+    <li>A category under Credit Card Payments with the same name as an account marks that account as a credit card.</li>
+    <li>A category under Hidden Categories with the same name as an account marks that credit card closed.</li>
+  </ul>
+</article>
+</div>
