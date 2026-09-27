@@ -14,6 +14,19 @@ nav: guides
   <p>In Settings, and in the File menu on Mac, choose <strong>Import from YNAB</strong>. You give it a Register CSV and a Plan CSV.</p>
 
   <h2>Register</h2>
+  <p>The register is one row for each transaction. ZxBudget treats the file as a register when the header includes <strong>Account</strong> and <strong>Cleared</strong>.</p>
+  <ul>
+    <li><strong>Account</strong> is the account’s name.</li>
+    <li><strong>Date</strong> is the day, written <strong>2019-04-03</strong>.</li>
+    <li><strong>Payee</strong> is who was paid, or who paid you. A transfer is written <strong>Transfer :</strong> plus the other account’s name, and each account has its own row. <strong>Starting Balance</strong> is the opening amount: Inflow when the account holds money, Outflow when the amount is owed. <strong>Reconciliation Balance Adjustment</strong> is a difference found while reconciling.</li>
+    <li><strong>Category Group</strong> and <strong>Category</strong> are where the money is categorized. Income uses the group <strong>Inflow</strong> and the category <strong>Ready to Assign</strong>. A tracking account can leave Category empty. A name can begin with an emoji, which ZxBudget keeps as the icon.</li>
+    <li><strong>Memo</strong> is a note. A split is two or more rows with the same date and account. The memo starts with <strong>Split (1/2)</strong>, <strong>Split (2/2)</strong>, and so on. The payee on each of those rows can differ.</li>
+    <li><strong>Outflow</strong> and <strong>Inflow</strong> are the amount, written <strong>$41.15</strong>. The side that was not used is <strong>$0.00</strong>.</li>
+    <li><strong>Cleared</strong> is <strong>Uncleared</strong>, <strong>Cleared</strong>, or <strong>Reconciled</strong>.</li>
+    <li><strong>Flag</strong> is Red, Orange, Yellow, Green, Blue, or Purple, a name of your own, or blank. During import you match any name that is not already one of those colors.</li>
+  </ul>
+  <p>A date after today comes in as a one-time upcoming transaction. A file may also include a <strong>Category Group/Category</strong> column. ZxBudget reads Category Group and Category.</p>
+  <p>A register in this shape looks like this.</p>
   <div class="table-scroll">
     <table>
       <caption class="muted">Sample register rows. These are not from a real budget.</caption>
@@ -71,18 +84,16 @@ nav: guides
       </tbody>
     </table>
   </div>
-  <ul>
-    <li>A split is two or more rows with the same date and account. The memo starts with <strong>Split (1/2)</strong>, <strong>Split (2/2)</strong>, and so on. The payee on each row can differ.</li>
-    <li>A transfer payee is <strong>Transfer :</strong> plus the other account’s name. Each side is its own row.</li>
-    <li>Income uses the group Inflow and the category Ready to Assign.</li>
-    <li>Cleared is Uncleared, Cleared, or Reconciled.</li>
-    <li>Flag may be Red, Orange, Yellow, Green, Blue, or Purple, or a name of your own. During import you match any name that is not already one of those colors.</li>
-    <li>A category or group can begin with an emoji. ZxBudget keeps the emoji as the icon.</li>
-    <li>A date after today comes in as a one-time upcoming transaction.</li>
-    <li>A tracking account can leave Category empty.</li>
-  </ul>
 
   <h2>Plan</h2>
+  <p>The plan is what was assigned to each category in each month. ZxBudget treats the file as a plan when the header includes <strong>Month</strong> and <strong>Assigned</strong>.</p>
+  <ul>
+    <li><strong>Month</strong> is written <strong>Mar 2019</strong>, or with the full month name, <strong>March 2019</strong>.</li>
+    <li><strong>Category Group</strong> and <strong>Category</strong> name the category that received the assignment. A category under <strong>Credit Card Payments</strong> with the same name as an account marks that account as a credit card. A category under <strong>Hidden Categories</strong> with the same name as an account marks that credit card closed.</li>
+    <li><strong>Assigned</strong> is the amount for that month, such as <strong>$880.00</strong>, or <strong>-$22.00</strong> when money was moved out of the category. A <strong>$0.00</strong> row is left out.</li>
+  </ul>
+  <p><strong>Activity</strong> and <strong>Available</strong> may be in the file. ZxBudget does not use them.</p>
+  <p>A plan in this shape looks like this.</p>
   <div class="table-scroll">
     <table>
       <caption class="muted">Sample plan rows. These are not from a real budget.</caption>
@@ -110,12 +121,5 @@ nav: guides
       </tbody>
     </table>
   </div>
-  <ul>
-    <li>Assigned can be negative when money was moved out of the category.</li>
-    <li>A <strong>$0.00</strong> row is left out.</li>
-    <li>Activity and Available can be in the file. ZxBudget does not use them.</li>
-    <li>A category under Credit Card Payments with the same name as an account marks that account as a credit card.</li>
-    <li>A category under Hidden Categories with the same name as an account marks that credit card closed.</li>
-  </ul>
 </article>
 </div>
