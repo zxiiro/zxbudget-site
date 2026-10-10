@@ -2,7 +2,8 @@
 
 Public pages for [zxbudget.zxiiro.ca](https://zxbudget.zxiiro.ca/).
 Issues are tracked in [zxiiro/zxbudget](https://github.com/zxiiro/zxbudget/issues/376),
-not in this repo.
+not in this repo. Prose and operating rules are `Specs/WEBSITE_DOCS_SPEC.md`
+in that repo.
 
 ## URLs that stay put
 
@@ -22,10 +23,11 @@ Node 22 (`/.nvmrc`).
 npm install
 npm run dev    # http://localhost:8080
 npm run build  # writes _site/
+npm run prose  # build, then Vale
 ```
 
 Edit files in `src/`. `_site/` is generated. GitHub Actions builds and
-publishes on every push to `main`.
+publishes on every push to `main`. A prose error skips that publish.
 
 The privacy policy wording is the legal text already on the App Store
 listing. Change it only with an explicit decision and a new "Last updated"
