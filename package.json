@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "eleventy",
-    "dev": "eleventy --serve"
+    "dev": "eleventy --serve",
+    "prose": "eleventy && vale --no-global _site && vale test .vale/styles/ZxBudget"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2"

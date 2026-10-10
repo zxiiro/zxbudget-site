@@ -1,0 +1,33 @@
+extends: existence
+message: "Do not print a storefront price (%s)."
+level: error
+nonword: true
+scope: sentence & doc(main)
+tokens:
+  - '(?i)\b(?:CAD|USD|EUR|GBP)\s*\$?\s*\d'
+  - '(?i)\$?\d+(?:\.\d+)?\s*(?:CAD|USD|EUR|GBP)\b'
+tests:
+  - name: flags a code before the amount
+    format: html
+    input: "<main><p>CAD $50 a year.</p></main>"
+    contains: ZxBudget.StorePrice
+  - name: flags an amount before the code
+    format: html
+    input: "<main><p>50 CAD a year.</p></main>"
+    contains: ZxBudget.StorePrice
+  - name: flags a dollar amount before the code
+    format: html
+    input: "<main><p>$50 USD a year.</p></main>"
+    contains: ZxBudget.StorePrice
+  - name: allows a sample amount
+    format: html
+    input: "<main><p>The amount is written $41.15.</p></main>"
+    absent: ZxBudget.StorePrice
+  - name: allows the Apple price sentence
+    format: html
+    input: "<main><p>The price is the one Apple shows for your country.</p></main>"
+    absent: ZxBudget.StorePrice
+  - name: allows the subscription sentence
+    format: html
+    input: "<main><p>One annual subscription billed by Apple, with Family Sharing, at the price Apple shows for your country.</p></main>"
+    absent: ZxBudget.StorePrice

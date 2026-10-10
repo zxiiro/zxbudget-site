@@ -1,0 +1,28 @@
+extends: existence
+message: "Say 'money', not '%s', unless you mean Canadian dollars."
+level: error
+ignorecase: true
+scope: sentence & doc(main)
+tokens:
+  - '(?<!Canadian )dollars'
+tests:
+  - name: allows Canadian dollars
+    format: html
+    input: "<main><p>Canadian dollars is already selected.</p></main>"
+    absent: ZxBudget.Dollars
+  - name: allows lowercase canadian dollars
+    format: html
+    input: "<main><p>The default is canadian dollars.</p></main>"
+    absent: ZxBudget.Dollars
+  - name: flags bare dollars
+    format: html
+    input: "<main><p>Count the dollars.</p></main>"
+    contains: ZxBudget.Dollars
+  - name: ignores a sample amount
+    format: html
+    input: "<main><p>The amount is $41.15.</p></main>"
+    absent: ZxBudget.Dollars
+  - name: ignores the banner
+    format: html
+    input: "<p>dollars</p><main><p>Money waits.</p></main>"
+    absent: ZxBudget.Dollars

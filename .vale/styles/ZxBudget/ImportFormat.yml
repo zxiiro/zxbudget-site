@@ -1,0 +1,59 @@
+extends: existence
+message: "Do not promise bank linking or statement-file import (%s)."
+level: error
+ignorecase: true
+nonword: true
+scope: sentence & doc(main)
+tokens:
+  - '\bOFX\b'
+  - '\bQFX\b'
+  - '\bQBO\b'
+  - '(?<!no )bank login'
+  - '(?<!not )connect(?:s|ed|ing)? to (?:a |your |the )?bank'
+  - '\blink(?:s|ed|ing)? (?:to )?(?:a |your )?bank\b'
+  - '\bbank linking\b'
+  - '\bstatement[- ]file import\b'
+tests:
+  - name: flags OFX, QFX, and QBO
+    format: html
+    input: "<main><p>Import an OFX file, a QFX file, or a QBO file.</p></main>"
+    contains:
+      - OFX
+      - QFX
+      - QBO
+  - name: flags a positive bank link
+    format: html
+    input: "<main><p>Link your bank.</p></main>"
+    contains: ZxBudget.ImportFormat
+  - name: flags connect to the bank
+    format: html
+    input: "<main><p>Connect to the bank.</p></main>"
+    contains: ZxBudget.ImportFormat
+  - name: flags connected to a bank
+    format: html
+    input: "<main><p>It is connected to a bank.</p></main>"
+    contains: ZxBudget.ImportFormat
+  - name: flags connecting to your bank
+    format: html
+    input: "<main><p>It is connecting to your bank.</p></main>"
+    contains: ZxBudget.ImportFormat
+  - name: flags statement-file import
+    format: html
+    input: "<main><p>A statement-file import is available.</p></main>"
+    contains: ZxBudget.ImportFormat
+  - name: allows no bank login
+    format: html
+    input: "<main><p>No ads, no bank login, and no ZxBudget account.</p></main>"
+    absent: ZxBudget.ImportFormat
+  - name: allows does not connect to a bank
+    format: html
+    input: "<main><p>The app does not connect to a bank.</p></main>"
+    absent: ZxBudget.ImportFormat
+  - name: allows the importer denial
+    format: html
+    input: "<main><p>The importer does not connect to a bank.</p></main>"
+    absent: ZxBudget.ImportFormat
+  - name: allows Import from YNAB
+    format: html
+    input: "<main><p>Import from YNAB. Two CSV files in the YNAB export format.</p></main>"
+    absent: ZxBudget.ImportFormat

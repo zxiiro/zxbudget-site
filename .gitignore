@@ -1,3 +1,6 @@
 node_modules/
 _site/
 .DS_Store
+.vale/styles/Google/
+.vale/styles/write-good/
+.vale/styles/.vale-config
