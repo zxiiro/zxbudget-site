@@ -38,8 +38,50 @@ jobs:
         with:
           path: _site
 
+  prose:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Prose
+        uses: vale-cli/vale-action@v3
+        with:
+          version: "3.24.0"
+          files: _site
+          sync: true
+          fail_level: error
+          filter_mode: nofilter
+          reporter: github-check
+          vale_flags: --no-global
+
+      - name: Rule tests
+        run: |
+          if ! command -v vale >/dev/null 2>&1; then
+            curl -fsSL -o "$RUNNER_TEMP/vale.tar.gz" \
+              https://github.com/vale-cli/vale/releases/download/v3.24.0/vale_3.24.0_Linux_64-bit.tar.gz
+            tar -C "$RUNNER_TEMP" -xzf "$RUNNER_TEMP/vale.tar.gz" vale
+            export PATH="$RUNNER_TEMP:$PATH"
+          fi
+          vale test .vale/styles/ZxBudget
+
   deploy:
-    needs: build
+    needs: [build, prose]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
