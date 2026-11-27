@@ -5,7 +5,8 @@ nonword: true
 scope: sentence & doc(main)
 tokens:
   - '(?i)\b(?:CAD|USD|EUR|GBP)\s*\$?\s*\d'
-  - '(?i)\$?\d+(?:\.\d+)?\s*(?:CAD|USD|EUR|GBP)\b'
+  - '(?i)\$?\d+(?:\.\d+)?\s*(?:USD|EUR|GBP)\b'
+  - '(?i)(?:\$(?!49\.99\b)\d+(?:\.\d+)?|(?<![\d$.])\d+(?:\.\d+)?)\s*CAD\b'
 tests:
   - name: flags a code before the amount
     format: html
@@ -19,15 +20,23 @@ tests:
     format: html
     input: "<main><p>$50 USD a year.</p></main>"
     contains: ZxBudget.StorePrice
+  - name: flags a different Canada amount
+    format: html
+    input: "<main><p>$50 CAD a year.</p></main>"
+    contains: ZxBudget.StorePrice
+  - name: flags the Canada price in the other order
+    format: html
+    input: "<main><p>CAD $49.99 a year.</p></main>"
+    contains: ZxBudget.StorePrice
   - name: allows a sample amount
     format: html
     input: "<main><p>The amount is written $41.15.</p></main>"
     absent: ZxBudget.StorePrice
-  - name: allows the Apple price sentence
+  - name: allows the Canada price
     format: html
-    input: "<main><p>The price is the one Apple shows for your country.</p></main>"
+    input: "<main><p>$49.99 CAD a year.</p></main>"
     absent: ZxBudget.StorePrice
-  - name: allows the subscription sentence
+  - name: allows the subscription sentences
     format: html
-    input: "<main><p>One annual subscription billed by Apple, with Family Sharing, at the price Apple shows for your country.</p></main>"
+    input: "<main><p>$49.99 CAD a year. Six months free at launch, with Family Sharing.</p></main>"
     absent: ZxBudget.StorePrice
