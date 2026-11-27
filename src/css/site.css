@@ -333,7 +333,24 @@ h1 {
   border: 1px solid var(--divider);
 }
 
-.price p { margin: 0.25rem 0 0; color: var(--secondary); }
+.price > div { min-width: 0; max-width: 100%; }
+
+.price p { margin: 0.35rem 0 0; color: var(--secondary); }
+
+.price .price-amount {
+  margin: 0;
+  color: var(--text);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.price-amount span {
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
 
 .feature-list {
   list-style: none;
@@ -517,6 +534,7 @@ footer a { color: var(--secondary); margin-right: 0.9rem; }
 @media (max-width: 860px) {
   .promises, .features, .steps, .docs, .index-grid, .hero-row { grid-template-columns: 1fr; }
   .phone { max-width: 260px; margin: 0.5rem auto 0; }
-  .price { flex-direction: column; align-items: flex-start; }
+  .price { flex-direction: column; align-items: stretch; }
+  .price .pill { align-self: flex-start; }
   h1 { font-size: 2.15rem; }
 }
